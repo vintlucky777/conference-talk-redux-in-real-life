@@ -1,0 +1,54 @@
+/* Variables */
+@cl-bg: #e9edf0;
+@cl-title: #282a2b;
+@cl-body: #444;
+@cl-brand: #1475bb;
+@vin-blue: #5bb7db;
+@vin-green: #60b044;
+@vin-red: #ff0000;
+
+/* Styles */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font: 1.5rem 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  color: #4d4d4d;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+code {
+  font: 1rem 'Cutive Mono', 'Roboto Mono', monospace;
+  font-weight: 600;
+  color: #444;
+}
+
+h1, h2, h3, h4, h5 {
+	color: @cl-title;
+}
+
+p {}
+
+button {
+  background-color: #2e7fac;
+  padding: .5rem .7rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #fff;
+}
+
+button+button {
+  margin-left: 1rem;
+}
+
+button[disabled] {
+  background-color: #6487a3;
+  cursor: auto;
+}
