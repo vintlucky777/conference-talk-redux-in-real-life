@@ -1,0 +1,64 @@
+.cnt {
+  position: fixed;
+  height: 100%;
+  width: 25rem;
+  top: 0;
+  left: -25rem;
+  /*background-color: rgba(42, 64, 73, 0.6);*/
+  z-index: 2000;
+  color: #dbd9b7;
+  transform: translate3d(25rem,0,0);
+  transition: transform .2s;
+  /*padding: .2rem;*/
+}
+.header {
+  background-color: #2a4049;
+  margin: 0;
+  padding: 1em;
+}
+
+.cnt-hidden {
+  transform: translate3d(0,0,0);
+}
+
+.hide {
+  position: absolute;
+  top: 0;
+  right: -2.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding-left: .5rem;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  background-color: #2a4049;
+  cursor: pointer;
+}
+
+.items {
+  width: 100%;
+  height: 92%;
+  overflow-y: scroll;
+}
+
+.item {
+  position: relative;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: rgba(38, 85, 121, 0.6);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  overflow: scroll;
+}
+.item:hover ~ .item {
+  background-color: rgba(46, 67, 84, 0.6);
+  color: #aaa;
+}
+
+.item:hover ~ .item-active {
+  background-color: rgba(47, 78, 103, 0.6);
+  color: #ddd;
+}
+.item-active {
+  background-color: rgba(46, 107, 153, 0.6);
+}

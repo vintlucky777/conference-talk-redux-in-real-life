@@ -28,8 +28,8 @@ const getPlugins = function (env) {
       break;
 
     case developmentEnvironment:
-      plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
+      plugins.push(new webpack.HotModuleReplacementPlugin());
       break;
   }
 
@@ -49,13 +49,15 @@ const getEntry = function (env) {
 };
 
 const getLoaders = function (env) {
-  const loaders = [{ test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint'] }];
+  const loaders = [];
 
   if (env === productionEnvironment ) {
     // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
-    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")});
+    loaders.push({ test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] });
+    loaders.push({ test: /(\.css|\.less)$/, loader: ExtractTextPlugin.extract("css?sourceMap&modules&camelCase&importLoaders=1&localIdentName=[name]__[local]!autoprefixer!less?sourceMap") });
   } else {
-    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']});
+    loaders.push({ test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] });
+    loaders.push({ test: /(\.css|\.less)$/, loaders: ['style', 'css?sourceMap&modules&camelCase&importLoaders=1&localIdentName=[name]__[local]', 'autoprefixer', 'less?sourceMap'] });
   }
 
   return loaders;
@@ -67,6 +69,10 @@ function getConfig(env) {
     devtool: env === productionEnvironment  ? 'source-map' : 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
     noInfo: true, // set to false to see a list of every file being bundled.
     entry: getEntry(env),
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.css', '.less'],
+      root: process.cwd(),
+    },
     target: env === testEnvironment ? 'node' : 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
     output: {
       path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
