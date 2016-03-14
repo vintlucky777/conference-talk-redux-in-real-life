@@ -44,7 +44,14 @@ export const ImageSlide = (props) => (
 );
 
 export class CodeEditSlide extends React.Component {
-  state = {text: ''}
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      text: props.defaultValue,
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({text: nextProps.text});
   }
@@ -55,9 +62,14 @@ export class CodeEditSlide extends React.Component {
   }
 
   render() {
+    const {title, defaultValue} = this.props;
+    const {text} = this.state;
+
     return (
-      <Slide title={this.props.title}>
-        <textarea className={styles.slideTextEdit} value={this.state.text} onChange={e => this.updateInput(e.target.value)}></textarea>
+      <Slide title={title}>
+        <textarea className={styles.slideTextEdit}
+                  value={text}
+                  onChange={e => this.updateInput(e.target.value)} />
       </Slide>
     );
   }

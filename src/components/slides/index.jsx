@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {TitleSlide, CodeSlide, ImageSlide, CodeEditSlide, CodeEditSlide1} from '../slide-types';
+import Code from '../code';
+import {Slide, TitleSlide, CodeSlide, ImageSlide, CodeEditSlide, CodeEditSlide1} from '../slide-types';
 
 const Slides = [
   <TitleSlide title='Redux in real life' subtitle='Simplicity revisited'/>,
@@ -72,13 +73,14 @@ _.isFinite(a)`}
   </CodeSlide>,
 
   <CodeSlide title='EcmaScript 7 (2 of 2)'>
-    {`const {a: b, c: d} = {a: 3, b:4}`}
+    {`const {a: b, c: d} = {a: 4, b: 3, c: 2, d: 1}
+console.log(a, b, c, d);`}
   </CodeSlide>,
 
   <CodeSlide title='EcmaScript 7 (2 of 2)'>
-    {`const {a: b, c: d} = {a: 3, b:4}
-
-> b = 3, d = 4`}
+    {`const {a: b, c: d} = {a: 4, b: 3, c: 2, d: 1}
+console.log(a, b, c, d);
+> undefined, 3, undefined, 1`}
   </CodeSlide>,
 
   <ImageSlide title='Back in the days'
@@ -102,17 +104,76 @@ _.isFinite(a)`}
               caption='Half way there' />,
 
   <CodeSlide title='The Holy Grail of UI'>
-    {`(state, action) => state`}
+  {`(state, action) => state`}
   </CodeSlide>,
 
-  <TitleSlide title='Hacking time!' subtitle='no, seriously, look into the sourcecode'/>,
-  <TitleSlide title='Hacking time!' subtitle='1) actions are in "/actions"'/>,
-  <TitleSlide title='Hacking time!' subtitle='2) reducers are in "/reducers"'/>,
-  <TitleSlide title='Hacking time!' subtitle='3) store is initialized in "/store"'/>,
+  <CodeSlide title='The Holy Grail of UI'>
+    {`(state, action) => state
 
-  <CodeEditSlide1 title='Writing redux' defaultValue={`
+// Oh, my! That ^ looks like a reducer
+// (accum, value) => accum`}
+  </CodeSlide>,
 
-  `}/>,
+  <CodeSlide title='What do we want?'>
+    {`1) single store == single source of truth`}
+  </CodeSlide>,
+
+  <CodeSlide title='What do we want?'>
+    {`1) single store == single source of truth
+2) every state is unique => immutable data`}
+  </CodeSlide>,
+
+  <CodeSlide title='What do we want?'>
+    {`1) single store == single source of truth
+2) every state is unique => immutable data
+3) no side-effects => pure functions to calc state`}
+  </CodeSlide>,
+
+  <CodeSlide title='What do we want?'>
+    {`1) single store == single source of truth
+2) every state is unique => immutable data
+3) no side-effects => pure functions to calc state
+4) listen to state changes`}
+  </CodeSlide>,
+
+  <CodeSlide title='What do we want?'>
+    {`1) single store == single source of truth
+2) every state is unique => immutable data
+3) no side-effects => pure functions to calc state
+4) listen to state changes
+5) commit new actions`}
+  </CodeSlide>,
+
+  <Slide title='Welcome: Redux'>
+    <p>Each action is a simple <b>JS-object</b><br/>Only restricion is a mandatory "type" field</p>
+    <p>Store is a <b>tree</b> of reducers<br/>
+    Reducer handles it's own branch of state<br/>
+    Root element is rootReducer</p>
+    <p>Each new state is a <b>new</b> object<br/>Not everything inside it is new objects, just the one's changed</p>
+  </Slide>,
+
+  <CodeSlide title='Writing Redux: reducers'>
+  {`const someReducer = (action, state = defState) => {
+  switch(action.type) {
+    case ...:
+      // construct changes obj (even with nested reducers)
+      const changes = doYourMagic();
+      // return new obj with prev state and changes
+      return {...state, ...changes};
+    default:
+      return state;
+  }
+}`}</CodeSlide>,
+
+  <CodeEditSlide1 title='Writing redux' defaultValue={`let's write an example...`}/>,
+
+  <Slide title='Hacking time!'>
+    <p>no, seriously, look into the sourcecode</p>
+    <p>1) actions are in "/actions"</p>
+    <p>2) reducers are in "/reducers"</p>
+    <p>3) store is initialized in "/store"</p>
+    <p>4) take a look at store.rewind() and TimeMachine</p>
+  </Slide>,
 
   <TitleSlide title="Questions?" />,
 ];

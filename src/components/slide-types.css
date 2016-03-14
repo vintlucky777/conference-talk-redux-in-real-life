@@ -20,7 +20,9 @@
 }
 
 .slide {
-  pointer-events: auto
+  pointer-events: auto;
+  font-size: 2rem;
+  font-weight: 300;
 }
 
 .slide-title {
