@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App';
+import App from './components/app';
 import IndexPage from './components/index-page';
 import AboutPage from './components/about-page';
 import Slideshow from './components/slideshow';
